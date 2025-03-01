@@ -1,0 +1,13 @@
+name: python-template # nome del compose in generale
+services:
+  python-template:
+    container_name: python-template
+    image: ghcr.io/matt7c2/python-template
+    build: .
+    environment:
+      ENV_DOCKER: production
+      TZ: Europe/Rome # per impostare il containe rcon il foso orario
+    ports: # se serve esporre la porta
+      - 3000:3000
+    env_file:
+      - .env

@@ -1,0 +1,61 @@
+# Evita di copiare la cache di Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Esclude ambienti virtuali locali
+.venv/
+venv/
+.env/
+
+# Esclude dipendenze installate localmente
+*.egg-info/
+*.dist-info/
+pip-wheel-metadata/
+
+# Esclude file e directory di configurazione degli editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Evita di copiare dati sensibili o di configurazione locale
+.env
+*.env
+secrets.json
+config.yaml
+
+# Esclude file di log e dati temporanei
+logs/
+*.log
+tmp/
+*.bak
+
+# Evita di copiare dati generati (database, cache, ecc.)
+db.sqlite3
+__pycache__/
+.cache/
+.local/
+
+# Evita di copiare i file di build di Python
+build/
+dist/
+
+# Esclude repository Git
+.git/
+.gitignore
+
+# Esclude file Poetry non necessari
+poetry.lock
+
+# Esclude configurazioni di VS Code
+*.code-workspace
+
+# Other
+.dockerignore
+.env.example
+Dockerfile
+docker-compose-prod.yml
+compose.yml
+README.md
