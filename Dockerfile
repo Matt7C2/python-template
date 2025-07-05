@@ -29,6 +29,7 @@ COPY pyproject.toml ./
 RUN poetry install --no-root
 
 COPY . .
+
 # Espone la porta (se necessaria, altrimenti puoi rimuoverla)
 EXPOSE 3000
 
