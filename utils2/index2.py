@@ -8,3 +8,6 @@ def funzione2():
 
 def _funzione3():
     return 'funzione3'
+
+def _funzione4():
+    return 'funzione4'
