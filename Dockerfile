@@ -1,37 +1,48 @@
-# Usa un'immagine base Python slim per ridurre le dimensioni finali
-FROM python:3.13-slim
 
-# Imposta variabili d'ambiente per gestire Poetry
-ENV POETRY_VERSION=1.8.4 \
-    POETRY_HOME="/opt/poetry" \
-    POETRY_VIRTUALENVS_CREATE=false \
-    PIP_NO_CACHE_DIR=1 \
+
+
+FROM python:3.13-alpine AS builder
+
+# Variabili ambiente
+ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    POETRY_HOME="/opt/poetry" \
+    PATH="/opt/poetry/bin:$PATH"
 
-# Aggiorna e installa dipendenze necessarie per build e runtime
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    build-essential && \
-    curl -sSL https://install.python-poetry.org | python3 - && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+# Dipendenze build
+RUN apk add --no-cache curl build-base libffi-dev openssl-dev musl-dev git
 
-# Aggiungi Poetry al PATH
-ENV PATH="${POETRY_HOME}/bin:${PATH}"
-
-# Crea e imposta la directory di lavoro
 WORKDIR /app
 
-# Copia i file del progetto
-COPY pyproject.toml ./
+# Installa Poetry via script ufficiale
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
-# Installa le dipendenze con Poetry
-RUN poetry install --no-root
+# Copia solo i file di dipendenze
+COPY pyproject.toml poetry.lock* ./
 
+# Installa le dipendenze globalmente senza dev
+RUN poetry config virtualenvs.create false \
+ && poetry install --no-interaction --no-ansi --no-root
+
+# Copia il codice
 COPY . .
 
-# Espone la porta (se necessaria, altrimenti puoi rimuoverla)
-EXPOSE 3000
+# =========================
+# Runtime
+# =========================
+FROM python:3.13-alpine AS runtime
 
-# Comando di avvio
-CMD ["poetry", "run", "python", "index.py"]
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+# Dipendenze runtime
+RUN apk add --no-cache libffi openssl
+
+WORKDIR /app
+
+# Copia solo site-packages e codice (nessun Poetry)
+COPY --from=builder /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
+COPY --from=builder /app /app
+
+# Comando di default
+CMD ["python", "index.py"]
