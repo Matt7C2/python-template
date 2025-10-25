@@ -23,8 +23,11 @@ def main():
     
     # Variabili presenti nel Dockerfile
     logger.info(f'docker env -> ENV_DOCKER: {os.getenv('ENV_DOCKER')}')
-    logger.info(f'docker env -> TZ: {os.getenv('ENV_DOCKER')}')
+    logger.info(f'docker env -> TZ: {os.getenv('TZ')}')
     
     # time.sleep(30) # per test con container
+
+    # (opzionale) Termina il programma senza errori
+    exit(0)
     
 main()
