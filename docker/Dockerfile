@@ -1,6 +1,6 @@
-
-
-
+# =========================
+# Build dev
+# =========================
 FROM python:3.13-alpine AS builder
 
 # Variabili ambiente
@@ -26,6 +26,8 @@ RUN poetry config virtualenvs.create false \
 
 # Copia il codice
 COPY . .
+
+RUN rm -f pyproject.toml poetry.lock*
 
 # =========================
 # Runtime

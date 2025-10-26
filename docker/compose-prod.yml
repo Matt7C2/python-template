@@ -1,19 +1,21 @@
 name: python-template # nome del compose in generale
+
 services:
   python-template:
     restart: always
     container_name: python-template
     image: ghcr.io/matt7c2/python-template
-    environment:
+    environment: # eventuali variabili d'ambiente 
       ENV_DOCKER: production
-      TZ: Europe/Rome # per impostare il containe rcon il foso orario
+      TZ: Europe/Rome # per impostare il container con il fuso orario
     ports: # se serve esporre la porta
       - 3000:3000
     env_file:
       - .env
     networks: 
       - mynet
-    mem_limit: 250m
+    # Limitazioni risorse
+    mem_limit: 500m
     cpus: 0.5
 
 networks: 

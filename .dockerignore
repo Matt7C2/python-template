@@ -53,9 +53,8 @@ poetry.lock
 *.code-workspace
 
 # Other
+README.md
+docker/
 .dockerignore
 .env.example
-Dockerfile
-docker-compose-prod.yml
-compose.yml
-README.md
+.python-version
