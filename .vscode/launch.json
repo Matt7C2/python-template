@@ -6,7 +6,7 @@
             "name": "Poetry run debug",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/index.py",
+            "program": "${workspaceFolder}/src/index.py",
             "console": "integratedTerminal",
             "args": [],
             "justMyCode": true
@@ -20,7 +20,7 @@
             "name": "Poetry run debug win",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/index.py",
+            "program": "${workspaceFolder}/src/index.py",
             "console": "integratedTerminal",
             "args": [],
             "justMyCode": true,

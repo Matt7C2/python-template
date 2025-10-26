@@ -25,7 +25,7 @@ RUN poetry config virtualenvs.create false \
  && poetry install --no-interaction --no-ansi --no-root
 
 # Copia il codice
-COPY . .
+COPY src/ .
 
 RUN rm -f pyproject.toml poetry.lock*
 
