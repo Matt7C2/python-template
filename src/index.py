@@ -25,9 +25,11 @@ def main():
     logger.info(f'docker env -> ENV_DOCKER: {os.getenv('ENV_DOCKER')}')
     logger.info(f'docker env -> TZ: {os.getenv('TZ')}')
 
-    # time.sleep(30) # secondi: per test file con container
+    time.sleep(1) # secondi: per test file con container
+
+    logger.info('Fine')
 
     # (opzionale) Termina il programma senza errori
-    exit(0)
+    #exit(0)
     
 main()
