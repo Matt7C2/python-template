@@ -58,20 +58,19 @@ Per aggiungere una libreria pubblica o privata
 Sono presenti due file per poter gestire il progetto in un container.
 
 **Dockerfile**  
-Contiene le istruzioni per creare l'immagine.  
-Per creare l'immagine dalla cartella docker:
+Contiene le istruzioni per creare l'immagine. 
+
+* Per creare l'immagine dalla cartella docker:  
 `docker image build -t ghcr.io/matt7c2/python-template .`
+
+* Dalla cartella root:  
+`docker image build -t ghcr.io/matt7c2/python-template -f docker/Dockerfile .`
 
 Per pushare:  
 `docker image push ghcr.io/matt7c2/python-template .`
 
 **compose.yml**  
 Per avviare il container buildando direttamente l'immagine dal Dockefile.
-
-Dalla cartella root:  
-`docker image build -t ghcr.io/matt7c2/python-template -f docker/Dockerfile .`
-
-O senza la build, sfruttando il compose:
 
 * Da dentro la cartella docker:  
 `docker compose up --build`
